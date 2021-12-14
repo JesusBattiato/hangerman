@@ -30,13 +30,27 @@ def read():
     return word
 
 
+
 def run():
     choosen_word = read()
     print(choosen_word)
-    letter_choosen = "i"
+    #letter_choosen = "i"
     letters_in_word = list(enumerate(choosen_word))
-    print(letters_in_word)
-    position_letters = [i for i, letter in letters_in_word if letter == letter_choosen.upper() ]
-    print(position_letters)
+    #print(letters_in_word)
+    #position_letters = [i for i, letter in letters_in_word if letter == letter_choosen.upper() ]
+    #print(position_letters)
+
+    encoding = ["_" for i in range(0, len(choosen_word))]
+    print(' '.join(encoding))
+    count = 0
+    while count < 10:
+        letter_choosen = input("Ingresa una letra: ")
+        
+        for n, i in letters_in_word:
+            if i == letter_choosen.upper():
+                encoding[n] = letter_choosen.upper()
+        print(' '.join(encoding))
+        count = count + 1
+
 if __name__ == '__main__':
     run()
