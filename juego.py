@@ -78,25 +78,32 @@ def read(): #Con esta funcion leeremos el archivo y el sistema eligira una palab
     word = word.upper() 
     
     return word
+                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                                           
 
-
+def ganaste():
+    pass
+def perdiste():
+    pass
 
 def run():
     os.system ("cls") #limpio pantalla
+    
     choosen_word = read() #asigno la palabra elegida a la variable nueva
     #print(choosen_word)
     encoding = ["_" for i in range(0, len(choosen_word))] #creo una lista para simular la codificacin de las letras de mis palabras
     error = 0
     print(HANGMANPICS[error])
+    print('\n')
     print(' '.join(encoding)) #la muestro
     count = 0 #inicio un contador
     list_letter_choosen = []
+    test_list = [x for x in encoding if x == "_"]
     
-
     while error < 7:
         #primero permito al usuario elegir una letra o arriesgar palabra
-        letter_choosen = input("Ingresa una letra\nSi quieres adivinar la palabra ingresa '1'\nsi quieres abandonar la partida ingresa '2': ")
-        count = count + 1
+        letter_choosen = input("\n\n---OPCIONES---\n1-Puedes ingresar una letra o,\n2-Puedes arriesgar la palabra si ya sabes cual es, para eso ingresa '1'\n3-Si quieres abandonar el juego ingresa '2'\n(elegir letra, 1 o 2):")
+        #count = count + 1
             
         #normalizo la letra o palabra escrita
         letter_choosen = re.sub(r"([^n\u0300-\u036f]|n(?!\u0303(?![\u0300-\u036f])))[\u0300-\u036f]+", r"\1", 
@@ -110,7 +117,7 @@ def run():
                 word_win_choosen = input("Ingresa la palabra Ganadora: ")
                 if word_win_choosen.upper() == choosen_word:
                     print("Ganaste")
-                    puntaje = 10 - count + 5
+                    puntaje = 10 - error + 5
                     print ("Tu puntuacion es:\n"+ str(puntaje) + " puntos")
                     break
                 else:
@@ -136,25 +143,27 @@ def run():
             os.system ("cls") #limpio pantalla
             print(HANGMANPICS[error])   
             print(' '.join(encoding))
+            print('\n')
             print(' '.join(list_letter_choosen))
             if error == 6:
                 break
+           
             test_list = [x for x in encoding if x == "_"]
-        
+           
             if test_list == []:
                 os.system ("cls")
                 print("Ganaste")
-                puntaje = 10 - count
+                puntaje = 10 - error
                 print ("tu puntuacion es:\n"+ str(puntaje) + " puntos")
                 break
-        else:
-            os.system ("cls") #limpio pantalla
+        else:            
             print("Debes ingresar solo una letra")
+            
 
                   
-    if test_list != [] and count == 20:
-        print("La palabra era " + choosen_word)
-    print(str(error) + "el error es")
+    if test_list != [] and error == 6:
+        print("\n\nTe Moriste.\nLa palabra era " + choosen_word)
+    
 
 
 if __name__ == '__main__':
